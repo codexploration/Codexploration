@@ -9,8 +9,8 @@ public class Main {
 		//Creating the ThreadPool
 		ExecutorService executor = Executors.newCachedThreadPool();
 		
-		//Creating 50 sample Threads and execute in ThreadPool
-		for (int i=1; i<50; i++){
+		//Creating 4 sample Threads and execute in ThreadPool
+		for (int i=1; i<5000; i++){
 			SampleThread sT = new SampleThread(i);
 			executor.execute(sT);
 		}
