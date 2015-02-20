@@ -1,4 +1,4 @@
-package net.codexploration.thread;
+package net.codexploration.thread.sample1;
 
 public class SampleThread implements Runnable{
 

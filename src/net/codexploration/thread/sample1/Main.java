@@ -1,4 +1,4 @@
-package net.codexploration.thread;
+package net.codexploration.thread.sample1;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
