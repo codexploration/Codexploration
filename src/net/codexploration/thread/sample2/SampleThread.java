@@ -10,12 +10,11 @@ public class SampleThread implements Runnable {
 	//base sleep time
 	private int _sleepTime = 1000;
 	
-	//variables needed to create timestamp later on
+	//variable needed to create timestamp later on
 	private final DateFormat _dateFormat;
-	private Date _timestamp;
 	
 	//flag will cause all threads to stop if set true
-	private static volatile boolean _shutDownRequestAll;
+	private static boolean _shutDownRequestAll;
 	
 	//constructor completes name and sleep time
 	SampleThread (int nr){
@@ -26,6 +25,7 @@ public class SampleThread implements Runnable {
 		
 	@Override
 	public void run() {
+		Date _timestamp;
 		//thread runs as long _shutDownRequestAll is not set true
 		while(!_shutDownRequestAll){
 			//get actual time

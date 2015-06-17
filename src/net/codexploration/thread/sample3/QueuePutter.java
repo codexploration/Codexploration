@@ -8,7 +8,7 @@ public class QueuePutter implements Runnable{
 
 	private String _name= "QueuePutter ";
 	private int _sleepTime=1000;
-	private static volatile boolean _shutDownRequestAll;
+	private static boolean _shutDownRequestAll;
 	private int number;
 	private SampleQueue _sampleQueue;
 	private final DateFormat _dateFormat;
@@ -21,18 +21,24 @@ public class QueuePutter implements Runnable{
 	}
 	@Override
 	public void run() {
+		try{
 		// TODO Auto-generated method stub
-		while (!_shutDownRequestAll){
-			_sampleQueue.putNr(number);
-			_timestamp = new Date();
-			System.out.println("["+_dateFormat.format(_timestamp)+"]"+_name+": Putted "+number+" into queue.");
-			number++;
-			try {
-				Thread.sleep(_sleepTime);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			while (!_shutDownRequestAll){
+				_sampleQueue.putNr(number);
+				_timestamp = new Date();
+				System.out.println("["+_dateFormat.format(_timestamp)+"]"+_name+": Putted "+number+" into queue.");
+				number++;
+				try {
+					Thread.sleep(_sleepTime);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+		}
+		catch (NullPointerException npe){
+			_timestamp = new Date();
+			System.out.println("["+_dateFormat.format(_timestamp)+"] "+_name+" lost SampleQueue");
 		}
 		_timestamp = new Date();
 		System.out.println("["+_dateFormat.format(_timestamp)+"] Shutting down "+_name);

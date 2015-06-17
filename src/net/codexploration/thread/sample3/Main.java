@@ -23,7 +23,7 @@ public class Main {
 		
 		//Pausing the main thread for 30 sec
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

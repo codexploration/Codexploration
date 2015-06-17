@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class SampleQueue {
-	private final Queue<Integer> _numbers = new LinkedList<Integer>();
+	private Queue<Integer> _numbers = new LinkedList<Integer>();
 	private final Lock _lock = new ReentrantLock();
 	private final Condition _queueAvailable = _lock.newCondition();
 	private final Condition _newNumber = _lock.newCondition();
@@ -85,8 +85,13 @@ public class SampleQueue {
 		_lock.unlock();
 	}
 	public void shutdown(){
-		 emptyQueueForShutdown();
-		 fillQueueForShutdown();
+		_lock.lock();
+		 /*emptyQueueForShutdown();
+		 fillQueueForShutdown();*/
+		_numbers=null;
+		_queueAvailable.signalAll();
+		_newNumber.signalAll();
+		_lock.unlock();
 	}
 
 }
