@@ -8,7 +8,7 @@ public class QueuePutter implements Runnable{
 
 	private String _name= "QueuePutter ";
 	private int _sleepTime=1000;
-	private static boolean _shutDownRequestAll;
+	private static volatile boolean _shutDownRequestAll;
 	private int number;
 	private SampleQueue _sampleQueue;
 	private final DateFormat _dateFormat;

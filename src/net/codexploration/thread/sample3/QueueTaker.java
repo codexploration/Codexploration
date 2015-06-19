@@ -8,7 +8,7 @@ public class QueueTaker implements Runnable {
 
 	private String _name = "QueueTaker ";
 	private int _sleepTime = 1000;
-	private static boolean _shutDownRequestAll;
+	private static volatile boolean _shutDownRequestAll;
 	private SampleQueue _sampleQueue;
 	private final DateFormat _dateFormat;
 	private Date _timestamp;

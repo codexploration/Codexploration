@@ -14,7 +14,7 @@ public class SampleThread implements Runnable {
 	private final DateFormat _dateFormat;
 	
 	//flag will cause all threads to stop if set true
-	private static boolean _shutDownRequestAll;
+	private static volatile boolean _shutDownRequestAll;
 	
 	//constructor completes name and sleep time
 	SampleThread (int nr){
