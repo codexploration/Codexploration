@@ -2,7 +2,6 @@ package net.codexploration.thread.sample3;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -55,39 +54,9 @@ public class SampleQueue {
 		}
 		return number;
 	}
-	private void emptyQueueForShutdown(){
-		_lock.lock();
-		while (_numbers.size()>_queueLength-1){
-			_numbers.poll();
-			_queueAvailable.signal();
-			try {
-				_newNumber.await(2, TimeUnit.SECONDS);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		_lock.unlock();
-	}
 	
-	private void fillQueueForShutdown(){
-		_lock.lock();
-		while (_numbers.size()==0){
-			_numbers.add(0);
-			_newNumber.signal();
-			try {
-				_queueAvailable.await(2, TimeUnit.SECONDS);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		_lock.unlock();
-	}
 	public void shutdown(){
 		_lock.lock();
-		 /*emptyQueueForShutdown();
-		 fillQueueForShutdown();*/
 		_numbers=null;
 		_queueAvailable.signalAll();
 		_newNumber.signalAll();
